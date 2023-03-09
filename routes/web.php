@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Login Route
-Route::get('/', [SessionController::class, 'show'])->middleware('guest');
+Route::get('/login', [SessionController::class, 'show'])->middleware('guest')->name('login');
 
 // Creating User Route
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
