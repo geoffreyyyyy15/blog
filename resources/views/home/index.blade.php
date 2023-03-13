@@ -1,27 +1,8 @@
 <x-layout>
     <x-nav />
-
         <div class="row">
-          <div class="col">
-            <div class="sticky-top">
-                <div class="side-panel">
-                    <a href="#" class="logo">Logo</a>
-                    <form class="search-form">
-                      <input type="text" placeholder="Search">
-                      <button type="submit">Search</button>
-                    </form>
-                    <nav class="menu">
-                      <a href="#">Home</a>
-                      <a href="#">Explore</a>
-                      <a href="#">Notifications</a>
-                      <a href="#">Settings</a>
-                    </nav>
-                  </div>
-                </div>
-          </div>
-
-
-          <div class="col-6">
+          <x-side-panel />
+          <div class="col-7">
             <x-flash />
             <form action="/post" method="post">
                 @csrf
@@ -35,20 +16,7 @@
                     <button type="submit" class="btn btn-primary">Post</button>
                   </div>
                 </form>
-
-
-
                 <x-posts :users="$users"  />
-          </div>
-          <div class="col pl-2 border border-top-0 border-bottom-0 border-secondary">
-            <div class="container">
-            <form action="#" method="post">
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Example textarea</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                  </div>
-                </form>
-            </div>
           </div>
         </div>
 </x-layout>

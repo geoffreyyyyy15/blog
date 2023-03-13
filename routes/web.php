@@ -32,6 +32,7 @@ Route::controller(RegisterController::class)->group(function() {
 // Home Page redirect
 Route::controller(HomeController::class)->group(function() {
     Route::get('home', 'index')->middleware('auth');
+    Route::get('posts', 'show')->middleware('auth');
 });
 
 Route::controller(SessionController::class)->group(function(){

@@ -10,7 +10,13 @@ class HomeController extends Controller
 {
     public function index() {
         return view('home.index')
-            ->with('users', Post::all());
+            ->with('users', Post::with('author')->get());
+    }
+
+    public function show() {
+        return view('home.posts')
+            ->with('users', Post::with('author')
+            ->where('user_id', auth()->id())->get());
     }
 
 }
