@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+// Login Route
+Route::get('/', [SessionController::class, 'show'])->middleware('guest');
 
 // Creating User Route
 Route::get('/', function() {

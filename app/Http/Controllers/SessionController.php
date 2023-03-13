@@ -15,7 +15,7 @@ class SessionController extends Controller
     public function destroy() {
         auth()->logout();
 
-        return redirect('/logout')->with('success', 'You have successfully logged out!');
+        return redirect('/');
     }
 
     public function store() {
