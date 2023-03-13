@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
@@ -16,21 +18,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Login Route
-Route::get('/', [SessionController::class, 'show'])->middleware('guest');
+
 
 // Creating User Route
-Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
-Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
-
+Route::get('/', function() {
+    return view('welcome');
+})->middleware('guest');
+Route::controller(RegisterController::class)->group(function() {
+    Route::get('register', 'create')->middleware('guest');
+    Route::post('register', 'store')->middleware('guest');
+});
 // Home Page redirect
-Route::get('home', [HomeController::class, 'index'])->middleware('auth');
+Route::controller(HomeController::class)->group(function() {
+    Route::get('home', 'index')->middleware('auth');
+});
 
-// User Logout
-Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth');
+Route::controller(SessionController::class)->group(function(){
+    // User Logout
+    Route::post('logout','destroy')->middleware('auth');
+    Route::get('logout', 'destroy')->middleware('auth');
+    // Logging in
+    Route::post('home', 'store');
+    // Login Route
+    Route::get('login',  'show')->middleware('guest')->name('login');
+});
+// Route::post('comment', [CommentsController::class, 'store']);
 
-// Logging in
-Route::post('home', [SessionController::class, 'store']);
+Route::post('post', [PostController::class, 'store']);
+
+
+
+
 
 
 

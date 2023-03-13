@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
@@ -14,7 +15,7 @@ class SessionController extends Controller
     public function destroy() {
         auth()->logout();
 
-        return redirect('/');
+        return redirect('/logout')->with('success', 'You have successfully logged out!');
     }
 
     public function store() {
@@ -27,6 +28,8 @@ class SessionController extends Controller
             throw ValidationException::withMessages(['email' => 'Your Provided credentials could not validate']);
         }
         session()->regenerate();
-        return redirect('/home')->with('success', 'You are now Logged in');
+        return redirect('/home')
+        ->with('success', 'You are now Logged in')
+        ->with('user', User::all());
     }
 }

@@ -15,7 +15,7 @@
           <li class="nav-item">
             <form action="/logout" method="post">
                 @csrf
-            <button type="submit">Logout</button>
+            <button type="submit" class=" btn btn-dark">Logout</button>
         </form>
           </li>
           <li class="nav-item dropdown">
