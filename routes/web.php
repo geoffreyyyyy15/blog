@@ -7,19 +7,6 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-// Login Route
-Route::get('/', [SessionController::class, 'show'])->middleware('guest');
 
 // Creating User Route
 Route::get('/', function() {
@@ -30,14 +17,23 @@ Route::controller(RegisterController::class)->group(function() {
     Route::post('register', 'store')->middleware('guest');
 });
 // Home Page redirect
-Route::controller(HomeController::class)->group(function() {
-    Route::get('home', 'index')->middleware('auth');
+Route::group(['middleware' => 'auth'], function(){
+    Route::controller(HomeController::class)->group(function() {
+        Route::get('home', 'index');
+        Route::get('posts', 'show');
+        Route::get('posts/{post}', 'destroy');
+        Route::get('post/{post}/edit', 'edit');
+        Route::put('post/{post}', 'update');
+    });
 });
-
 Route::controller(SessionController::class)->group(function(){
     // User Logout
-    Route::post('logout','destroy')->middleware('auth');
-    Route::get('logout', 'destroy')->middleware('auth');
+    Route::group(['middleware' => 'auth'], function() {
+        Route::post('logout','destroy');
+        Route::get('logout', 'destroy');
+    });
+    // Login Route
+    Route::get('/', 'show')->middleware('guest');
     // Logging in
     Route::post('home', 'store');
     // Login Route
@@ -45,7 +41,7 @@ Route::controller(SessionController::class)->group(function(){
 });
 // Route::post('comment', [CommentsController::class, 'store']);
 
-Route::post('post', [PostController::class, 'store']);
+Route::post('post', [PostController::class, 'store'])->middleware();
 
 
 
