@@ -17,14 +17,8 @@ Route::controller(RegisterController::class)->group(function() {
     Route::post('register', 'store')->middleware('guest');
 });
 // Home Page redirect
-Route::group(['middleware' => 'auth'], function(){
-    Route::controller(HomeController::class)->group(function() {
-        Route::get('home', 'index');
-        Route::get('posts', 'show');
-        Route::get('posts/{post}', 'destroy');
-        Route::get('post/{post}/edit', 'edit');
-        Route::put('post/{post}', 'update');
-    });
+Route::controller(HomeController::class)->group(function() {
+    Route::get('home', 'index')->middleware('auth');
 });
 Route::controller(SessionController::class)->group(function(){
     // User Logout
