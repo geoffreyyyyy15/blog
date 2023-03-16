@@ -1,6 +1,5 @@
 <x-layout>
     <x-nav />
-<<<<<<< HEAD
     <div class="mr-5">
         <div class="d-flex ">
           <x-side-panel />
@@ -21,12 +20,3 @@
     </div>
 </div>
 </x-layout>
-=======
-    <x-side-panel />
-
-    <x-posts :users="$users"  />
-</div>
-
-
-</x-layout>
->>>>>>> 57d7635a5fc2bede6b73602d4e5ea732ba123afc

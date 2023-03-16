@@ -17,8 +17,15 @@ Route::controller(RegisterController::class)->group(function() {
     Route::post('register', 'store')->middleware('guest');
 });
 // Home Page redirect
-Route::controller(HomeController::class)->group(function() {
-    Route::get('home', 'index')->middleware('auth');
+Route::group(['middleware' => 'auth'], function(){
+    Route::controller(HomeController::class)->group(function() {
+        Route::get('home', 'index');
+        Route::get('posts', 'show');
+        Route::get('posts/{post}', 'destroy');
+        Route::get('post/{post}/edit', 'edit');
+        Route::put('post/{post}', 'update');
+        Route::get('post/{post:body}/{id}', 'showPost');
+    });
 });
 Route::controller(SessionController::class)->group(function(){
     // User Logout
@@ -34,7 +41,10 @@ Route::controller(SessionController::class)->group(function(){
     Route::get('login',  'show')->middleware('guest')->name('login');
 });
 // Route::post('comment', [CommentsController::class, 'store']);
-
+Route::controller(CommentsController::class)->group(function() {
+        Route::post('post/comment/{id}', 'store');
+        Route::post('post/delete/{id}', 'destroy');
+});
 Route::post('post', [PostController::class, 'store'])->middleware();
 
 

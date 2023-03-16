@@ -16,6 +16,6 @@ class PostController extends Controller
         $post->create([
         'user_id' => auth()->id(),
         'body' => request('body')]);
-        return back()->with('success', 'Comment Success!');
+        return back()->with('success', 'Posted!');
     }
 }

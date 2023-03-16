@@ -3,7 +3,7 @@
     <x-flash />
         <div class="d-flex flex-column gap-4 justify-content-center align-items-center mx-auto vh-100">
             <i class="fa-brands fa-github text-white" style="font-size: 70px; "></i>
-            <p style="color:rgba(255, 255, 255, 0.596); font-size: 2rem">Sign in to GitHub</p>
+            <p style="color:rgba(255, 255, 255, 0.596); font-size: 2rem">Sign in to GitBlog</p>
         <form action="/home" method="post" class="d-flex flex-column gap-2 w-25  rounded p-4 " style="border: 1px solid  #30363D; background-color:#161B22; ">
             @csrf
             <p class="text-white">Or sign up to have an account <a href="/register" class="text-primary" style="text-decoration: none;">here</a></p>
